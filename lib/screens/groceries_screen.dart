@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:shopping_list/data/dummy_items.dart';
 import 'package:shopping_list/widgets/grocery_list_item.dart';
 
 class GroceriesScreen extends StatefulWidget{
@@ -18,10 +20,16 @@ class _GroceriesScreenState extends State<GroceriesScreen> {
       appBar: AppBar(
         title: Text ('Your Groceries'),
       ),
-      body: ListView(
-        children: [
-          GroceryListItem(),
-        ],
+      body: ListView.builder(
+        itemCount: groceryItems.length,
+        itemBuilder: (ctx, index) {
+          final item = groceryItems[index];
+          return GroceryListItem(
+            color: item.category.color,
+            name: item.name,
+            quantity: item.quantity,
+          );
+        },     
       ),
     );
   }
